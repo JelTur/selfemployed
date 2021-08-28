@@ -1,0 +1,14 @@
+{% extends "base" %}
+
+{% block content %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">My Tasks</h1>
+            <p>
+                <a href="#" class="btn btn-primary my-2">Add a new task</a>
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

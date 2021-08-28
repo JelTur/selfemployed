@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class ProjectController {
-    @GetMapping("/projects")
-    public String showProjects(){
-        return "projects/project_list";
+public class TaskController {
+    @GetMapping("/tasks")
+    public String showTasks(){
+        return "tasks/task_list";
     }
 
 }
