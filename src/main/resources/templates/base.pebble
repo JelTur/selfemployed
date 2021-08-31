@@ -134,25 +134,25 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/clients">
+                        <a class="nav-link" href="/clients/list">
                             <span data-feather="users"></span>
                             Clients
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/projects">
+                        <a class="nav-link" href="/projects/list">
                             <span data-feather="check-square"></span>
                             Projects
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/tasks">
+                        <a class="nav-link" href="/tasks/list">
                             <span data-feather="file-text"></span>
                             Tasks
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/reports">
+                        <a class="nav-link" href="/reports/list">
                             <span data-feather="bar-chart-2"></span>
                             Reports
                         </a>

@@ -6,7 +6,7 @@
         <div class="col-lg-6 col-md-8 mx-auto">
             <h1 class="fw-light">My Projects</h1>
             <p>
-                <a href="#" class="btn btn-primary my-2">Add a new project</a>
+                <a href="/projects/add" class="btn btn-primary my-2">Add a new project</a>
             </p>
         </div>
     </div>

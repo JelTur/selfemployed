@@ -6,8 +6,25 @@
         <div class="col-lg-6 col-md-8 mx-auto">
             <h1 class="fw-light">My Tasks</h1>
             <p>
-                <a href="#" class="btn btn-primary my-2">Add a new task</a>
+                <a href="/tasks/add" class="btn btn-primary my-2">Add a new task</a>
             </p>
+        </div>
+        <div class="container">
+            <div class="row row-cols-4">
+                <div class="col">Task</div>
+                <div class="col">Project/Client</div>
+                <div class="col">Activity type</div>
+                <div class="col">Start date & time</div>
+                <div class="col">Task 1</div>
+                <div class="col">Project 2/Client 3</div>
+                <div class="col">Consulting</div>
+                <div class="col">21.08.2021 14:00</div>
+                <div class="col">Task 2</div>
+                <div class="col">Project 1/Client 2</div>
+                <div class="col">Development</div>
+                <div class="col">11.08.2021 9:00</div>
+            </div>
+        </div>
         </div>
     </div>
 </section>

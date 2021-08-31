@@ -1,0 +1,52 @@
+    {% extends "base" %}
+
+    {% block content %}
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">New Project Form</h1>
+                <p>
+                    <a href="#" class="btn btn-primary my-2">Submit</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <label for="formGroupExampleInput" class="form-label">Project title</label>
+                <input type="text" class="form-control" id="formGroupExampleInput"
+                       placeholder="Please enter a project name">
+            </div>
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <label for="formGroupExampleInput2" class="form-label">Client name</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Choose a client</option>
+                        <option value="1">Client One</option>
+                        <option value="2">Client Two</option>
+                        <option value="3">Client Three</option>
+                    </select>
+                </div>
+                <div class="row py-lg-5">
+                    <div class="col-lg-6 col-md-8 mx-auto">
+                        <label for="formGroupExampleInput2" class="form-label">Project duration</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2"
+                               placeholder="Please enter project start date">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <p>
+                    <a href="#" class="btn btn-primary my-2">Submit</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    {% endblock %}

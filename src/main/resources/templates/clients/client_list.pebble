@@ -6,7 +6,7 @@
         <div class="col-lg-6 col-md-8 mx-auto">
             <h1 class="fw-light">My Clients</h1>
             <p>
-                <a href="#" class="btn btn-primary my-2">Add a new client</a>
+                <a href="/clients/add" class="btn btn-primary my-2">Add a new client</a>
             </p>
         </div>
     </div>
