@@ -11,10 +11,10 @@
         </div>
         <div class="container">
             <div class="row row-cols-4">
-                <div class="col">Task</div>
-                <div class="col">Project/Client</div>
-                <div class="col">Activity type</div>
-                <div class="col">Start date & time</div>
+                <div class="col"><h5>Task</h5></div>
+                <div class="col"><h5>Project/Client</h5></div>
+                <div class="col"><h5>Activity type</h5></div>
+                <div class="col"><h5>Start date & time</h5></div>
                 <div class="col">Task 1</div>
                 <div class="col">Project 2/Client 3</div>
                 <div class="col">Consulting</div>
