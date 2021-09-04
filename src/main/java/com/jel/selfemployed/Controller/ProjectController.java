@@ -1,6 +1,8 @@
 package com.jel.selfemployed.Controller;
 
+import com.jel.selfemployed.Model.Client;
 import com.jel.selfemployed.Model.Project;
+import com.jel.selfemployed.Repository.ClientRepository;
 import com.jel.selfemployed.Repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,8 @@ import java.util.Optional;
 public class ProjectController {
     @Autowired
     private ProjectRepository projectRepository;
+    @Autowired
+    private ClientRepository clientRepository;
 
     @GetMapping("/projects/list")
     public String showProjects(Model model) {
@@ -31,20 +35,25 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/add")
-    public String showAddProject() {
+    public String showAddProject(Model model) {
+        Iterable<Client> clients = clientRepository.findAll();
+        model.addAttribute("clients", clients);
+
         return "projects/project_add";
     }
 
     @PostMapping("/projects/add")
     public RedirectView submitAddProject(
             @RequestParam(name = "project_title", required = true) String projectTitle,
-            @RequestParam(name = "project_client", required = false) String projectClient,
+            @RequestParam(name = "client_id", required = false) int clientId,
             @RequestParam(name = "project_start_date", required = false) String projectStartDate
     ) {
+        Client client = clientRepository.findById(clientId).get();
+
         Project project = new Project();
         project.setProjectTitle(projectTitle);
-        project.setProjectClient(projectClient);
         project.setProjectStartDate(projectStartDate);
+        project.setClient(client);
 
         projectRepository.save(project);
 
@@ -58,6 +67,9 @@ public class ProjectController {
         if (!projectOptional.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+
+        Iterable<Client> clients = clientRepository.findAll();
+        model.addAttribute("clients", clients);
 
         Project project = projectOptional.get();
         model.addAttribute("project", project);
@@ -75,7 +87,6 @@ public class ProjectController {
         Project project = new Project();
         project.setId(id);
         project.setProjectTitle(projectTitle);
-        project.setProjectClient(projectClient);
         project.setProjectStartDate(projectStartDate);
 
         projectRepository.save(project);

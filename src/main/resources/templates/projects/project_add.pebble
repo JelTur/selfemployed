@@ -23,12 +23,11 @@
             </div>
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                    <label for="formGroupExampleInput2" class="form-label">Client name</label>
-                    <select class="form-select" name="project_client">
-                        <option selected>Choose a client</option>
-                        <option value="1">Client One</option>
-                        <option value="2">Client Two</option>
-                        <option value="3">Client Three</option>
+                    <label for="formGroupExampleInput2" class="form-label">Client</label>
+                    <select class="form-select" name="client_id">
+                        {% for client in clients %}
+                            <option value="{{ client.id }}">{{ client.companyName }}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="row py-lg-5">

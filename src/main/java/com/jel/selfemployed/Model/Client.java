@@ -1,9 +1,7 @@
 package com.jel.selfemployed.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Client {
@@ -22,6 +20,16 @@ public class Client {
     private String companyCity;
     private String companyCountry;
     private String companyZip;
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Project> projects;
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
 
     public String getContactFirstName() {
         return contactFirstName;

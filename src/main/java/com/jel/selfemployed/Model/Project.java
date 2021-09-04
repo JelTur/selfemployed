@@ -8,7 +8,9 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String projectTitle;
-    private String projectClient;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "client_id", nullable = false)
+    private Client client;
     private String projectStartDate;
 
     public Integer getId() {
@@ -19,20 +21,20 @@ public class Project {
         this.id = id;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     public String getProjectTitle() {
         return projectTitle;
     }
 
     public void setProjectTitle(String projectTitle) {
         this.projectTitle = projectTitle;
-    }
-
-    public String getProjectClient() {
-        return projectClient;
-    }
-
-    public void setProjectClient(String projectClient) {
-        this.projectClient = projectClient;
     }
 
     public String getProjectStartDate() {
