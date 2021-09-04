@@ -27,11 +27,10 @@
                         </svg>
 
                         <div class="card-body">
-                            <p class="card-text">Short description of the client.</p>
+                            <p class="card-text">{{ client.companyDescription }}.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    <a href="/clients/edit/{{ client.id }}" class="btn btn-sm btn-outline-secondary">Edit</a>
                                 </div>
                                 <small class="text-muted">9 mins</small>
                             </div>

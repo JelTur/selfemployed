@@ -2,13 +2,13 @@
 
     {% block content %}
 
-    <form action="/tasks/add" method="post">
+    <form action="/tasks/edit/{{ task.id }}" method="post">
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">New Task Form</h1>
+                <h1 class="fw-light">Task Form</h1>
                 <p>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </p>
             </div>
         </div>
@@ -17,13 +17,13 @@
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <label for="formGroupExampleInput" class="form-label">Task title</label>
-                <input type="text" name="task_title" class="form-control" id="formGroupExampleInput"
+                <input type="text" name="task_title" value="{{ task.taskTitle }}" class="form-control" id="formGroupExampleInput"
                        placeholder="Please enter a task title">
             </div>
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <label for="formGroupExampleInput2" class="form-label">Project title</label>
-                    <select class="form-select" name="project_title">
+                    <select class="form-select" aria-label="Default select example">
                         <option selected>Choose a project</option>
                         <option value="1">Project One</option>
                         <option value="2">Project Two</option>
@@ -33,7 +33,7 @@
                 <div class="row py-lg-5">
                     <div class="col-lg-6 col-md-8 mx-auto">
                         <label for="formGroupExampleInput2" class="form-label">Client name</label>
-                        <select class="form-select" name="client_name">
+                        <select class="form-select" aria-label="Default select example">
                             <option selected>Choose a client</option>
                             <option value="1">Client One</option>
                             <option value="2">Client Two</option>
@@ -41,16 +41,8 @@
                         </select>
                     </div>
                     <div class="col-lg-6 col-md-8 mx-auto">
-                        <label for="formGroupExampleInput2" class="form-label">Activity type</label>
-                        <select class="form-select" name="task_activity_type">
-                            <option selected>Choose activity type</option>
-                            <option value="1">Consulting</option>
-                            <option value="2">Development</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-6 col-md-8 mx-auto">
                         <label for="formGroupExampleInput2" class="form-label">Status</label>
-                        <select class="form-select" name="task_status">
+                        <select class="form-select" aria-label="Default select example">
                             <option selected>Choose a status</option>
                             <option value="1">In progress</option>
                             <option value="2">Completed</option>
@@ -58,7 +50,7 @@
                     </div>
                     <div class="row py-lg-5">
                         <div class="col-lg-6 col-md-8 mx-auto">
-                            <input type="text" name="task_start_time" class="form-control" id="formGroupExampleInput2"
+                            <input type="text" name="task_start_time" value="{{ task.taskStartTime }}" class="form-control" id="formGroupExampleInput2"
                                    placeholder="Please enter task start time">
                         </div>
                     </div>
@@ -70,7 +62,7 @@
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <p>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </p>
             </div>
         </div>
