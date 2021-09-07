@@ -1,7 +1,11 @@
 package com.jel.selfemployed.Controller;
 
 import com.jel.selfemployed.Model.Task;
+import com.jel.selfemployed.Model.Project;
+import com.jel.selfemployed.Model.TaskTime;
 import com.jel.selfemployed.Repository.TaskRepository;
+import com.jel.selfemployed.Repository.ProjectRepository;
+import com.jel.selfemployed.Repository.TaskTimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -13,12 +17,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Controller
 public class TaskController {
     @Autowired
     private TaskRepository taskRepository;
+    @Autowired
+    private ProjectRepository projectRepository;
+    @Autowired
+    private TaskTimeRepository taskTimeRepository;
 
     @GetMapping("/tasks/list")
     public String showTasks(Model model) {
@@ -30,26 +39,31 @@ public class TaskController {
     }
 
     @GetMapping("/tasks/add")
-    public String showAddTask() {
+    public String showAddTask(Model model) {
+        Iterable<Project> projects = projectRepository.findAll();
+        model.addAttribute("projects", projects);
         return "tasks/task_add";
     }
 
     @PostMapping("/tasks/add")
     public RedirectView submitAddTask(
             @RequestParam(name = "task_title", required = true) String taskTitle,
-            @RequestParam(name = "task_project", required = false) String taskProject,
-            @RequestParam(name = "task_client", required = false) String taskClient,
+            @RequestParam(name = "project_id", required = false) int projectId,
             @RequestParam(name = "task_status", required = false) String taskStatus,
-            @RequestParam(name = "task_start_date", required = false) String taskStartDate
+            @RequestParam(name = "activity_type", required = false) String activityType
     ) {
+        Project project = projectRepository.findById(projectId).get();
+
         Task task = new Task();
         task.setTaskTitle(taskTitle);
-        task.setTaskProject(taskProject);
-        task.setTaskClient(taskClient);
         task.setTaskStatus(taskStatus);
-        task.setTaskStartDate(taskStartDate);
+        task.setTaskStartDate(new Date());
+        task.setActivityType(activityType);
+        task.setProject(project);
 
         taskRepository.save(task);
+
+        System.out.println(java.time.LocalDate.now());
 
         return new RedirectView("/tasks/list");
     }
@@ -61,6 +75,8 @@ public class TaskController {
         if (!taskOptional.isPresent()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
+        Iterable<Project> projects = projectRepository.findAll();
+        model.addAttribute("projects", projects);
 
         Task task = taskOptional.get();
         model.addAttribute("task", task);
@@ -72,21 +88,53 @@ public class TaskController {
     public RedirectView submitEditTask(
             @PathVariable int id,
             @RequestParam(name = "task_title", required = true) String taskTitle,
-            @RequestParam(name = "task_project", required = false) String taskProject,
-            @RequestParam(name = "task_client", required = false) String taskClient,
             @RequestParam(name = "task_status", required = false) String taskStatus,
-            @RequestParam(name = "task_start_date", required = false) String taskStartDate
+            @RequestParam(name = "activity_type", required = false) String activityType,
+            @RequestParam(name = "project_id", required = false) int projectId
     ) {
-        Task task = new Task();
+        Optional<Task> taskOptional = taskRepository.findById(id);
+        if (!taskOptional.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        Project project = projectRepository.findById(projectId).get();
+
+        Task task = taskOptional.get();
         task.setId(id);
         task.setTaskTitle(taskTitle);
-        task.setTaskProject(taskProject);
-        task.setTaskClient(taskClient);
         task.setTaskStatus(taskStatus);
-        task.setTaskStartDate(taskStartDate);
+        task.setActivityType(activityType);
+        task.setProject(project);
 
         taskRepository.save(task);
 
-        return new RedirectView("/tasks/edit/" + id);
+        return new RedirectView("/tasks/list/");
     }
+
+    @PostMapping("/tasks/add_hours/{id}")
+    public RedirectView submitAddTaskHours(
+            @PathVariable int id,
+            @RequestParam(name = "hours", required = true) int hours
+    ) {
+        Optional<TaskTime> taskTimeOptional = taskTimeRepository.findByTaskIdAndSessionDate(id, new Date());
+
+        TaskTime taskTime;
+        if (taskTimeOptional.isPresent()) {
+            taskTime = taskTimeOptional.get();
+            taskTime.setSessionHours(hours + taskTime.getSessionHours());
+        } else {
+            Task task = taskRepository.findById(id).get();
+
+            taskTime = new TaskTime();
+            taskTime.setSessionHours(hours);
+            taskTime.setTask(task);
+            taskTime.setSessionDate(new Date());
+        }
+
+        taskTimeRepository.save(taskTime);
+
+        return new RedirectView("/tasks/list");
+    }
+
+
 }

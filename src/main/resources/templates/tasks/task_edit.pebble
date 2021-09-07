@@ -1,72 +1,34 @@
-    {% extends "base" %}
+{% extends "base" %}
 
-    {% block content %}
-
+{% block content %}
+    <h1>Task Form</h1>
     <form action="/tasks/edit/{{ task.id }}" method="post">
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Task Form</h1>
-                <p>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </p>
-            </div>
+        <div class="mb-3">
+            <label for="id-task-title" class="form-label">Task title</label>
+            <input value="{{ task.taskTitle }}" type="text" name="task_title" class="form-control" id="id-task-title" placeholder="Please enter a task title">
         </div>
-    </section>
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <label for="formGroupExampleInput" class="form-label">Task title</label>
-                <input type="text" name="task_title" value="{{ task.taskTitle }}" class="form-control" id="formGroupExampleInput"
-                       placeholder="Please enter a task title">
-            </div>
-            <div class="row py-lg-5">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                    <label for="formGroupExampleInput2" class="form-label">Project title</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Choose a project</option>
-                        <option value="1">Project One</option>
-                        <option value="2">Project Two</option>
-                        <option value="3">Project Three</option>
-                    </select>
-                </div>
-                <div class="row py-lg-5">
-                    <div class="col-lg-6 col-md-8 mx-auto">
-                        <label for="formGroupExampleInput2" class="form-label">Client name</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Choose a client</option>
-                            <option value="1">Client One</option>
-                            <option value="2">Client Two</option>
-                            <option value="3">Client Three</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-6 col-md-8 mx-auto">
-                        <label for="formGroupExampleInput2" class="form-label">Status</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Choose a status</option>
-                            <option value="1">In progress</option>
-                            <option value="2">Completed</option>
-                        </select>
-                    </div>
-                    <div class="row py-lg-5">
-                        <div class="col-lg-6 col-md-8 mx-auto">
-                            <input type="text" name="task_start_time" value="{{ task.taskStartTime }}" class="form-control" id="formGroupExampleInput2"
-                                   placeholder="Please enter task start time">
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="mb-3">
+            <label for="id-task-project" class="form-label">Project title</label>
+            <select id="id-task-project" class="form-select" name="project_id">
+                    {% for project in projects %}
+                    <option value="{{ project.id }}" {% if project.id == task.project.id %}selected{% endif %}>{{ project.projectTitle }}</option>
+                    {% endfor %}
+            </select>
         </div>
-    </section>
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <p>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </p>
-            </div>
+        <div class="mb-3">
+            <label for="id-task-activity" class="form-label">Activity type</label>
+            <select id="id-task-activity" class="form-select" name="activity_type">
+                <option value="Development" {% if task.activityType == "Development" %}selected{% endif %}>Development</option>
+                <option value="Consultancy" {% if task.activityType == "Consultancy" %}selected{% endif %}>Consultancy</option>
+            </select>
         </div>
-    </section>
+        <div class="mb-3">
+            <label for="id-task-status" class="form-label">Status</label>
+            <select id="id-task-status" class="form-select" name="task_status">
+                <option value="In progress" {% if task.taskStatus == "In progress" %}selected{% endif %}>In progress</option>
+                <option value="Completed" {% if task.taskStatus == "Completed" %}selected{% endif %}>Completed</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
-    {% endblock %}
+{% endblock %}

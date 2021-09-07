@@ -1,6 +1,8 @@
 package com.jel.selfemployed.Model;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Task {
@@ -8,10 +10,15 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String taskTitle;
-    private String taskProject;
-    private String taskClient;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "project_id", nullable = false)
+    private Project project;
     private String taskStatus;
-    private String taskStartDate;
+    @Temporal(TemporalType.DATE)
+    private Date taskStartDate;
+    private String activityType;
+    @OneToMany(mappedBy = "task", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<TaskTime> taskTimes;
 
     public Integer getId() {
         return id;
@@ -21,7 +28,6 @@ public class Task {
         this.id = id;
     }
 
-
     public String getTaskTitle() {
         return taskTitle;
     }
@@ -30,20 +36,12 @@ public class Task {
         this.taskTitle = taskTitle;
     }
 
-    public String getTaskProject() {
-        return taskProject;
+    public Project getProject() {
+        return project;
     }
 
-    public void setTaskProject(String taskProject) {
-        this.taskProject = taskProject;
-    }
-
-    public String getTaskClient() {
-        return taskClient;
-    }
-
-    public void setTaskClient(String taskClient) {
-        this.taskClient = taskClient;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public String getTaskStatus() {
@@ -54,12 +52,36 @@ public class Task {
         this.taskStatus = taskStatus;
     }
 
-    public String getTaskStartDate() {
+    public Date getTaskStartDate() {
         return taskStartDate;
     }
 
-    public void setTaskStartDate(String taskStartDate) {
+    public void setTaskStartDate(Date taskStartDate) {
         this.taskStartDate = taskStartDate;
     }
-}
 
+    public String getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(String activityType) {
+        this.activityType = activityType;
+    }
+
+    public Set<TaskTime> getTaskTimes() {
+        return taskTimes;
+    }
+
+    public void setTaskTimes(Set<TaskTime> taskTimes) {
+        this.taskTimes = taskTimes;
+    }
+
+    public int getTotalHours() {
+        int totalHoursByTask = 0;
+        for (TaskTime taskTime: taskTimes) {
+            totalHoursByTask = totalHoursByTask + taskTime.getSessionHours();
+        }
+
+        return totalHoursByTask;
+    }
+}

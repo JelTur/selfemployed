@@ -69,17 +69,18 @@
                             <label for="inputZip" class="form-label">Zip</label>
                             <input type="text" name="company_zip" class="form-control" id="inputZip">
                         </div>
+
+                        <section class="py-5 text-center container">
+                            <div class="row py-lg-5">
+                                <div class="col-lg-6 col-md-8 mx-auto">
+                                    <p>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
                     </form>
                 </div>
-            </div>
-        </div>
-    </section>
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <p>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </p>
             </div>
         </div>
     </section>

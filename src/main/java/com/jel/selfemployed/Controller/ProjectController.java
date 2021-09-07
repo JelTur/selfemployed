@@ -84,8 +84,13 @@ public class ProjectController {
             @RequestParam(name = "project_client", required = false) String projectClient,
             @RequestParam(name = "project_start_date", required = false) String projectStartDate
     ) {
-        Project project = new Project();
-        project.setId(id);
+        Optional<Project> projectOptional = projectRepository.findById(id);
+
+        if (!projectOptional.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        Project project = projectOptional.get();
         project.setProjectTitle(projectTitle);
         project.setProjectStartDate(projectStartDate);
 
