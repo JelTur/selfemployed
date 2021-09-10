@@ -10,4 +10,5 @@ public interface TaskTimeRepository extends CrudRepository<TaskTime, Integer> {
 
     Optional<TaskTime> findByTaskIdAndSessionDate(int id, Date sessionDate);
 
+    Iterable<TaskTime> findAllBySessionDateBetween(Date fromDate, Date toDate);
 }

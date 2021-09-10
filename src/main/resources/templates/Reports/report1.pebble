@@ -1,0 +1,45 @@
+{% extends "base" %}
+
+{% block content %}
+
+<form action="/reports/report1" method="get">
+    <div class="mb-3">
+        <label for="id-from-date" class="form-label">Date From</label>
+        <input type="date" name="date_from" class="form-control" {% if date_from is not empty %}value="{{ date_from|date("yyyy-MM-dd") }}"{% endif %} id="id-from-date">
+    </div>
+    <div class="mb-3">
+        <label for="id-from-to" class="form-label">Date To</label>
+        <input type="date" name="date_to" class="form-control" {% if date_to is not empty %}value="{{ date_to|date("yyyy-MM-dd") }}"{% endif %} id="id-from-to">
+    </div>
+    <button type="submit" class="btn btn-primary">Show</button>
+</form>
+
+{% if report is not empty %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Project</th>
+            <th scope="col">Task</th>
+            <th scope="col">Hours</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for project_entry in report.entrySet() %}
+            <tr>
+                <th scope="row">{{ project_entry.key }}</th>
+                <td></td>
+                <td></td>
+            </tr>
+            {% for task_entry in project_entry.value.entrySet() %}
+            <tr>
+                <th scope="row"></th>
+                <td>{{ task_entry.key }}</td>
+                <td>{{ task_entry.value }}</td>
+            </tr>
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+{% endblock %}
