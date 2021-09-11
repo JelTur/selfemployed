@@ -11,6 +11,10 @@
         <label for="id-from-to" class="form-label">Date To</label>
         <input type="date" name="date_to" class="form-control" {% if date_to is not empty %}value="{{ date_to|date("yyyy-MM-dd") }}"{% endif %} id="id-from-to">
     </div>
+    <div class="mb-3">
+        <label for="id-rate" class="form-label">Rate per hour</label>
+        <input type="text" name="rate" class="form-control" {% if rate is not empty %}value="{{ rate }}"{% endif %} id="id-rate">
+    </div>
     <button type="submit" class="btn btn-primary">Show</button>
 </form>
 
@@ -25,11 +29,21 @@
         <tbody>
         {% for day in days %}
             <tr>
-                <th scope="row">{{ day.dt }}</th>
+                <td scope="row">{{ day.dt }}</td>
                 <td>{{ day.hours }}</td>
             </tr>
         {% endfor %}
         </tbody>
+        <tfoot>
+        <tr>
+            <th>Total hours</th>
+            <td>{{ total_hours }}</td>
+        </tr>
+        <tr>
+            <th>Brutto salary</th>
+            <td>€ {{ (total_hours * rate)|numberformat("0.00") }}</td>
+        </tr>
+        </tfoot>
     </table>
 {% endif %}
 

@@ -21,7 +21,7 @@ public class ClientController {
     @Autowired
     private ClientRepository clientRepository;
 
-    @GetMapping("/clients/list")
+    @GetMapping("/")
     public String showClients(Model model) {
         Iterable<Client> clients = clientRepository.findAll();
 
@@ -66,7 +66,7 @@ public class ClientController {
 
         clientRepository.save(client);
 
-        return new RedirectView("/clients/list");
+        return new RedirectView("/");
     }
 
     @GetMapping("/clients/edit/{id}")
@@ -116,6 +116,6 @@ public class ClientController {
 
         clientRepository.save(client);
 
-        return new RedirectView("/clients/list");
+        return new RedirectView("/");
     }
 }

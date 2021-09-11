@@ -21,14 +21,23 @@ public class AccountingController {
     public String showReportsByTask(
             @RequestParam(name = "date_from", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateFrom,
             @RequestParam(name = "date_to", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date dateTo,
+            @RequestParam(name = "rate", required = false) Float rate,
             Model model
     ) {
         if (dateFrom != null && dateTo != null) {
+
             List<IAccountingDay> days = taskTimeRepository.findHoursSumBetwwenDates(dateFrom, dateTo);
+
+            int totalHours = 0;
+            for (IAccountingDay d: days) {
+                totalHours = totalHours + d.getHours();
+            }
 
             model.addAttribute("days", days);
             model.addAttribute("date_from", dateFrom);
             model.addAttribute("date_to", dateTo);
+            model.addAttribute("rate", rate);
+            model.addAttribute("total_hours", totalHours);
         }
 
         return "accounting/accounting";

@@ -128,13 +128,7 @@
             <div class="position-sticky pt-3">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link{% if active_menu == 'dashboard' %} active{% endif %}" aria-current="page" href="/">
-                            <span data-feather="home"></span>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/clients/list">
+                        <a class="nav-link" href="/">
                             <span data-feather="users"></span>
                             Clients
                         </a>
