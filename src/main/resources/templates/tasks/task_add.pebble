@@ -21,6 +21,9 @@
             <select id="id-task-activity" class="form-select" name="activity_type">
                 <option value="Development">Development</option>
                 <option value="Consultancy">Consultancy</option>
+                <option value="Integration">Integration</option>
+                <option value="Documentation">Documentation</option>
+                <option value="Testing">Testing</option>
             </select>
         </div>
         <div class="mb-3">

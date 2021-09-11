@@ -12,7 +12,7 @@ public class Project {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
-    private String projectStartDate;
+    private String projectDescription;
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Task> tasks;
 
@@ -40,12 +40,12 @@ public class Project {
         this.projectTitle = projectTitle;
     }
 
-    public String getProjectStartDate() {
-        return projectStartDate;
+    public String getProjectDescription() {
+        return projectDescription;
     }
 
-    public void setProjectStartDate(String projectStartDate) {
-        this.projectStartDate = projectStartDate;
+    public void setProjectDescription(String projectStartDate) {
+        this.projectDescription = projectStartDate;
     }
 
     public Set<Task> getTasks() {

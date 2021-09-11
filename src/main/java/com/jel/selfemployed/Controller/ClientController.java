@@ -116,6 +116,6 @@ public class ClientController {
 
         clientRepository.save(client);
 
-        return new RedirectView("/clients/edit/" + id);
+        return new RedirectView("/clients/list");
     }
 }

@@ -31,9 +31,9 @@
                 </div>
                 <div class="row py-lg-5">
                     <div class="col-lg-6 col-md-8 mx-auto">
-                        <label for="formGroupExampleInput2" class="form-label">Project duration</label>
-                        <input type="text" name="project_start_date" value="{{ project.projectStartDate }}" class="form-control" id="formGroupExampleInput2"
-                               placeholder="Please enter project start date">
+                        <label for="formGroupExampleInput2" class="form-label">Project description</label>
+                        <input type="text" name="project_description" value="{{ project.projectDescription }}" class="form-control" id="formGroupExampleInput2"
+                               placeholder="Please enter project description">
                     </div>
                 </div>
             </div>

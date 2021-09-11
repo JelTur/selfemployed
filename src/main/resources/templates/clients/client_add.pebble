@@ -59,11 +59,8 @@
                             <input type="text" name="company_city" class="form-control" id="inputCity">
                         </div>
                         <div class="col-md-4">
-                            <label for="inputState" class="form-label">State</label>
-                            <select id="inputState" name="company_state" class="form-select">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                            </select>
+                            <label for="inputState" class="form-label">Country</label>
+                            <input type="text" name="company_country" class="form-control" id="inputCountry">
                         </div>
                         <div class="col-md-2">
                             <label for="inputZip" class="form-label">Zip</label>

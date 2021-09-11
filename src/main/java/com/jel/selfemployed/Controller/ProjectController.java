@@ -52,7 +52,7 @@ public class ProjectController {
 
         Project project = new Project();
         project.setProjectTitle(projectTitle);
-        project.setProjectStartDate(projectStartDate);
+        project.setProjectDescription(projectStartDate);
         project.setClient(client);
 
         projectRepository.save(project);
@@ -82,7 +82,7 @@ public class ProjectController {
             @PathVariable int id,
             @RequestParam(name = "project_title", required = true) String projectTitle,
             @RequestParam(name = "project_client", required = false) String projectClient,
-            @RequestParam(name = "project_start_date", required = false) String projectStartDate
+            @RequestParam(name = "project_description", required = false) String projectDescription
     ) {
         Optional<Project> projectOptional = projectRepository.findById(id);
 
@@ -92,10 +92,10 @@ public class ProjectController {
 
         Project project = projectOptional.get();
         project.setProjectTitle(projectTitle);
-        project.setProjectStartDate(projectStartDate);
+        project.setProjectDescription(projectDescription);
 
         projectRepository.save(project);
 
-        return new RedirectView("/projects/edit/" + id);
+        return new RedirectView("/projects/list");
     }
 }
