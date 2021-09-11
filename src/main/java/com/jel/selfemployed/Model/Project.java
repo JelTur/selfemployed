@@ -44,8 +44,8 @@ public class Project {
         return projectDescription;
     }
 
-    public void setProjectDescription(String projectStartDate) {
-        this.projectDescription = projectStartDate;
+    public void setProjectDescription(String projectDescription) {
+        this.projectDescription = projectDescription;
     }
 
     public Set<Task> getTasks() {
