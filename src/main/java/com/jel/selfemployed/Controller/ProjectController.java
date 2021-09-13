@@ -46,13 +46,13 @@ public class ProjectController {
     public RedirectView submitAddProject(
             @RequestParam(name = "project_title", required = true) String projectTitle,
             @RequestParam(name = "client_id", required = false) int clientId,
-            @RequestParam(name = "project_start_date", required = false) String projectStartDate
+            @RequestParam(name = "project_description", required = false) String projectDescription
     ) {
         Client client = clientRepository.findById(clientId).get();
 
         Project project = new Project();
         project.setProjectTitle(projectTitle);
-        project.setProjectDescription(projectStartDate);
+        project.setProjectDescription(projectDescription);
         project.setClient(client);
 
         projectRepository.save(project);
